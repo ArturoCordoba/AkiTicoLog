@@ -1,0 +1,22 @@
+famositico(nombre, genero, edad, lugarDeNacimiento, profesion, estatura, colorDeCabello, apodo, posicion, equipo).
+
+Su personaje es hombre o mujer?
+
+Su personaje nació en Costa Rica?
+En qué provincia nació su personaje?
+En qué país nació su personaje?
+
+Su personaje es menor de 40 años?
+
+Su personaje tiene una estatura mayor a 1.80 m?
+
+Cuál es la profesión de su personaje?
+
+Cuál es el equipo de su personaje?
+
+En qué posición juega su personaje?
+
+Su personaje tiene algún apodo?
+Cuál es el apodo de su personaje?
+
+Cuál es el color del cabello de su personaje?
