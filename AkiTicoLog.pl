@@ -1,9 +1,13 @@
 %Preguntar al usuario y leer su respuesta
-pregunta():-write("Cual es su nombre?"),nl,read_line_to_codes(user_input, Codes), atom_codes(A, Codes), atom_string(A, String), split_string(String," ","",List),ultimo_elemento_lista(List,Last),eliminar_caracter_string(Last,".",NewLast),eliminar_elemento_lista(Last,List,NewList),convertir_string_lista(NewLast,LastList),append(NewList,LastList,NEWList),write(NEWList).
+pregunta():-write("Cual es su nombre?"),nl,read_line_to_codes(user_input, Codes), atom_codes(A, Codes), atom_string(A, String),string_lower(String, Lower), split_string(Lower," ","",List),ultimo_elemento_lista(List,Last),eliminar_caracter_string(Last,".",NewLast),eliminar_elemento_lista(Last,List,NewList),convertir_string_lista(NewLast,LastList),append(NewList,LastList,NEWList),write(NEWList).
 
 %Obtener el ultimo elemento de la lista
 ultimo_elemento_lista([Y], Y).
 ultimo_elemento_lista([_|Xs],Y):- ultimo_elemento_lista(Xs,Y).
+
+%Obtener primer elemento de la lista y convierte a string
+primer_elemento_lista([X|_],X).
+string_primer_elemento(Lista,String):-primer_elemento_lista(Lista,Elemento),atom_string(Elemento,String).
 
 %Borrar un elemento de una lista
 eliminar_elemento_lista(_, [], []).
