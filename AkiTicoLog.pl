@@ -172,7 +172,7 @@ pregunta6(R):-preguntaAux("Su personaje tiene algun apodo?",X),nl,(igualdad(X,"n
 		
 pregunta7(R):-preguntaAux("Cual es el color del cabello de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta7(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-analizar_respuesta(L):-nl,tamanio_lista(L,0,SizeL),((SizeL>1;SizeL=0),write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.	
+analizar_respuesta(L):-nl,tamanio_lista(L,0,SizeL),(SizeL=0,write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.
 
 akiTicoLog():-write("Bienvenido! Veamos si puedo adivinar el famositico en el que estas pensando"),nl,pregunta1(A),pregunta2(B),pregunta3(C),pregunta4(D),pregunta5(E,F,G),pregunta6(H),pregunta7(I)
 		,findall(Nombre,famositico(Nombre,A,C,B,E,D,I,H,G,F),Lista),analizar_respuesta(Lista),akiTicoLog().
