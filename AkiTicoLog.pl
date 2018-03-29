@@ -159,7 +159,7 @@ pregunta3(R):-preguntaAux("Cual es la edad de su personaje?",X),nl,((igualdad(X,
 
 pregunta4(R):-preguntaAux("Cual es la estatura (en metros) de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta4(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-pregunta5(R1,R2,R3):-preguntaAux("¿Cual es la profesion de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5(R1,R2,R3);igualdad(X,"duda"),igualdad(R1,_),igualdad(R2,_),igualdad(R3,_),!;igualdad(X,R1))
+pregunta5(R1,R2,R3):-preguntaAux("Cual es la profesion de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5(R1,R2,R3);igualdad(X,"duda"),igualdad(R1,_),igualdad(R2,_),igualdad(R3,_),!;igualdad(X,R1))
 			,(((igualdad(X,"futbolista");igualdad(X,"exfutbolista");igualdad(X,"tecnico");igualdad(X,"ciclista")),pregunta5A(R2);igualdad(R2,_))),(((igualdad(X,"futbolista");igualdad(X,"exfutbolista")),pregunta5B(R3);igualdad(R3,_))),!.
 
 pregunta5A(R2):-preguntaAux("Cual es el equipo de su personaje?",Y),nl,((igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5A(R2);igualdad(Y,"duda"),igualdad(R2,_),!;corregir(Y,A),igualdad(A,R2)),!.
@@ -172,7 +172,7 @@ pregunta6(R):-preguntaAux("Su personaje tiene algun apodo?",X),nl,(igualdad(X,"n
 		
 pregunta7(R):-preguntaAux("Cual es el color del cabello de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta7(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-analizar_respuesta(L):-nl,tamanio_lista(L,0,size),((size>1;size=0),write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.	
+analizar_respuesta(L):-nl,tamanio_lista(L,0,SizeL),((SizeL>1;SizeL=0),write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.	
 
 akiTicoLog():-write("Bienvenido! Veamos si puedo adivinar el famositico en el que estas pensando"),nl,pregunta1(A),pregunta2(B),pregunta3(C),pregunta4(D),pregunta5(E,F,G),pregunta6(H),pregunta7(I)
 		,findall(Nombre,famositico(Nombre,A,C,B,E,D,I,H,G,F),Lista),analizar_respuesta(Lista),akiTicoLog().
