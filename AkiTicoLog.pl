@@ -122,8 +122,8 @@ eliminar_elemento_lista(X, [Y|Xs], [Y|Zs]):-
           eliminar_elemento_lista(X, Xs, Zs).
 
 %Obtener el tamaño de una lista
-tamaño_lista([], L, L).
-tamaño_lista([_|Y], A, L):-A2 is A + 1,tamaño_lista(Y, A2, L).
+tamanio_lista([], L, L).
+tamanio_lista([_|Y], A, L):-A2 is A + 1,tamanio_lista(Y, A2, L).
 
 %Borrar un caracter de un string
 eliminar_caracter_string(S,C,X) :- atom_concat(L,R,S), atom_concat(C,W,R), atom_concat(L,W,X).%, atom_string(A,X).
@@ -150,30 +150,30 @@ verbo_identificado(X, Z):-primer_elemento(X,Z).
 %Preguntar al usuario y leer su respuesta
 preguntaAux(Pregunta,K):-write(Pregunta),nl,read_line_to_codes(user_input, Codes), atom_codes(A, Codes), atom_string(A, String), split_string(String," ","",List),ultimo_elemento_lista(List,Last),eliminar_caracter_string(Last,".",NewLast),eliminar_elemento_lista(Last,List,NewList),convertir_string_lista(NewLast,LastList),append(NewList,LastList,NEWList),analizador(NEWList,K).
 
-pregunta1(R):-preguntaAux("¿Su personaje es hombre o mujer?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta1(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
+pregunta1(R):-preguntaAux("Su personaje es hombre o mujer?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta1(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-pregunta2(R):-preguntaAux("¿Su personaje nació en Costa Rica?",X),nl,(igualdad(X,"no entendi"),write("Disculpe, no entendí su respuesta"),nl,pregunta2(R);igualdad(X,"duda"),igualdad(_,R);(igualdad(X,"afirmacion"),preguntaAux("En qué provincia nació su personaje?",Y),nl;preguntaAux("En qué país nació su personaje?",Y),nl)
-		,((igualdad(Y,"no entendi");igualdad(Y,"afirmacion");igualdad(Y,"negacion")),write("Disculpe, no entendí su respuesta"),nl,pregunta2(R);igualdad(Y,"duda"),igualdad(R,_);corregir(Y,Z),igualdad(Z,R))),!.
+pregunta2(R):-preguntaAux("Su personaje nacio en Costa Rica?",X),nl,(igualdad(X,"no entendi"),write("Disculpe, no entendi su respuesta"),nl,pregunta2(R);igualdad(X,"duda"),igualdad(_,R);(igualdad(X,"afirmacion"),preguntaAux("En que provincia nacio su personaje?",Y),nl;preguntaAux("En que pais nacio su personaje?",Y),nl)
+		,((igualdad(Y,"no entendi");igualdad(Y,"afirmacion");igualdad(Y,"negacion")),write("Disculpe, no entendi su respuesta"),nl,pregunta2(R);igualdad(Y,"duda"),igualdad(R,_);corregir(Y,Z),igualdad(Z,R))),!.
 
-pregunta3(R):-preguntaAux("¿Cuál es la edad de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta3(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
+pregunta3(R):-preguntaAux("Cual es la edad de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta3(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-pregunta4(R):-preguntaAux("¿Cuál es la estatura (en metros) de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta4(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
+pregunta4(R):-preguntaAux("Cual es la estatura (en metros) de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta4(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-pregunta5(R1,R2,R3):-preguntaAux("¿Cuál es la profesión de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta5(R1,R2,R3);igualdad(X,"duda"),igualdad(R1,_),igualdad(R2,_),igualdad(R3,_),!;igualdad(X,R1))
+pregunta5(R1,R2,R3):-preguntaAux("¿Cual es la profesion de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5(R1,R2,R3);igualdad(X,"duda"),igualdad(R1,_),igualdad(R2,_),igualdad(R3,_),!;igualdad(X,R1))
 			,(((igualdad(X,"futbolista");igualdad(X,"exfutbolista");igualdad(X,"tecnico");igualdad(X,"ciclista")),pregunta5A(R2);igualdad(R2,_))),(((igualdad(X,"futbolista");igualdad(X,"exfutbolista")),pregunta5B(R3);igualdad(R3,_))),!.
 
-pregunta5A(R2):-preguntaAux("¿Cuál es el equipo de su personaje?",Y),nl,((igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta5A(R2);igualdad(Y,"duda"),igualdad(R2,_),!;corregir(Y,A),igualdad(A,R2)),!.
+pregunta5A(R2):-preguntaAux("Cual es el equipo de su personaje?",Y),nl,((igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5A(R2);igualdad(Y,"duda"),igualdad(R2,_),!;corregir(Y,A),igualdad(A,R2)),!.
 
-pregunta5B(R3):-preguntaAux("¿En qué posición juega su personaje?",Y),nl,((igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta5B(R3);igualdad(Y,"duda"),igualdad(R3,_),!;corregir(Y,A),igualdad(A,R3)),!.
+pregunta5B(R3):-preguntaAux("En que posicion juega su personaje?",Y),nl,((igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta5B(R3);igualdad(Y,"duda"),igualdad(R3,_),!;corregir(Y,A),igualdad(A,R3)),!.
 
-pregunta6(R):-preguntaAux("¿Su personaje tiene algún apodo?",X),nl,(igualdad(X,"no entendi"),write("Disculpe, no entendí su respuesta"),nl,pregunta6(R)
-		;igualdad(X,"afirmacion"),preguntaAux("¿Cuál es el apodo de su personaje?",Y),nl,(igualdad(Y,"duda"),igualdad(R,_);(igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta6(R);igualdad(R,Y))
+pregunta6(R):-preguntaAux("Su personaje tiene algun apodo?",X),nl,(igualdad(X,"no entendi"),write("Disculpe, no entendi su respuesta"),nl,pregunta6(R)
+		;igualdad(X,"afirmacion"),preguntaAux("Cual es el apodo de su personaje?",Y),nl,(igualdad(Y,"duda"),igualdad(R,_);(igualdad(Y,"afirmacion");igualdad(Y,"negacion");igualdad(Y,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta6(R);igualdad(R,Y))
 		;(igualdad(X,"duda");igualdad(X,"negacion")),igualdad(R,_)),!.
 		
-pregunta7(R):-preguntaAux("¿Cuál es el color del cabello de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendí su respuesta"),nl,pregunta7(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
+pregunta7(R):-preguntaAux("Cual es el color del cabello de su personaje?",X),nl,((igualdad(X,"afirmacion");igualdad(X,"negacion");igualdad(X,"no entendi")),write("Disculpe, no entendi su respuesta"),nl,pregunta7(R);igualdad(X,"duda"),igualdad(R,_);igualdad(X,R)),!.
 
-analizar_respuesta(L):-nl,tamaño_lista(L,0,Tamaño),((Tamaño>1;Tamaño=0),write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.	
+analizar_respuesta(L):-nl,tamanio_lista(L,0,size),((size>1;size=0),write("No he podido adivinar!");write("El personaje es: "),ultimo_elemento_lista(L,X),write(X)),nl,nl,!.	
 
-akiTicoLog():-write("Bienvenido! Veamos si puedo adivinar el famositico en el que estás pensando"),nl,pregunta1(A),pregunta2(B),pregunta3(C),pregunta4(D),pregunta5(E,F,G),pregunta6(H),pregunta7(I)
+akiTicoLog():-write("Bienvenido! Veamos si puedo adivinar el famositico en el que estas pensando"),nl,pregunta1(A),pregunta2(B),pregunta3(C),pregunta4(D),pregunta5(E,F,G),pregunta6(H),pregunta7(I)
 		,findall(Nombre,famositico(Nombre,A,C,B,E,D,I,H,G,F),Lista),analizar_respuesta(Lista),akiTicoLog().
 		
